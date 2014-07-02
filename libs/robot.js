@@ -1,12 +1,49 @@
 'use strict';
 
+const ROTATING_CLOCKWISE = 1;
+const ROTATING_NO = 0;
+const ROTATING_COUNTERCLOCKWISE = -1;
+const ROTATING_UTURN = 2;
+const MOVING_FOWARD = 1;
+const MOVING_NO = 0;
+const MOVING_REWARD = -1;
+
+const FACING_NORTH = 0;
+const FACING_EAST = 1;
+const FACING_SOUTH = 2;
+const FACING_WEST = 3;
+
 function Robot() {
 
 	var self = {
-		gear : 0,
-		rotating : 0
+		gear : MOVING_NO,
+		rotating : ROTATING_NO,
+		clearPorts : function() {
+			this.gear = MOVING_NO;
+			this.rotating = ROTATING_NO;
+		},
+		ram : [],
+		procedures : {
+			'turnLeft' : function() {
+				self.rotating = ROTATING_COUNTERCLOCKWISE;
+			},
+			'turnRight' : function() {
+				self.rotating = ROTATING_CLOCKWISE;
+			},
+			'moveFoward' : function() {
+				self.gear = MOVING_FOWARD;
+			},
+			'moveReward' : function() {
+				self.gear = MOVING_REWARD;
+			},
+		},
+		execute : function() {
+			this.procedures[this.ram.shift()]();
+		}
 	};
-
+/*
+nom_de_linstruction = 'turnLeft';
+self.instruction[nom_de_linstruction]()*/
 
 
 	return self;
@@ -21,9 +58,7 @@ function World() {
 		{title : 'South',	dx : 0 , dy : 1},
 		{title : 'West',	dx : -1, dy : 0}
 	];
-
-	var CLOCKWISE = 1;
-	var COUNTERCLOCKWISE = -1;
+	var count_directions = directions.length ;
 
 	var self = {
 
@@ -49,12 +84,22 @@ function World() {
 				};
 			}
 		},
-		nextRobotState : function(which) {
-			this.positions[which].y--;
+		_nextWhichRobotState : function(which) {
+			var robot = this.robots[which];
+			var o = this.positions[which].o;
+			o += robot.rotating;
+			o = ( o < 0 )
+				? ( o + count_directions )
+				: ( o % count_directions );
+			var orientation = directions[o];
+			this.positions[which].o = o;
+			this.positions[which].x += orientation.dx * robot.gear;
+			this.positions[which].y += orientation.dy * robot.gear;
+			robot.clearPorts();
 		},
 /*		nextState : function() {
-			for (var dossart in this.robots ) {
-				if (robots.hasOwnProperty(dossart)) {
+			for (var which in this.robots ) {
+				if (robots.hasOwnProperty(which)) {
 
 				}
 			}
