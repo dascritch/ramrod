@@ -14,7 +14,8 @@ test( "World initialisation",function() {
 	//Nothing is done
 
 	//Then
-	ok( world.robots.length === 0, "New world d'ont have robots");
+	ok( world.robots.length === 0, "New worlds have no robots");
+	ok( world.walls.length === 0, "New worlds have no robots");
 
 });
 
@@ -24,7 +25,7 @@ test( "Adding robots in a world",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 1,1);
+	world.addRobot(robot, 1,1);
 	//Then
 	ok( world.robots.length === 1, "There is one robot in the world");
 	deepEqual( world.robots[0] , robot, "the first robot is the only added robot");
@@ -34,19 +35,18 @@ test( "Adding robots in a world",function() {
 
 });
 
-
 test( "Gearing north",function() {
 	//Given
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 1,1 , 0);
+	world.addRobot(robot, 1,1 , 0);
 	robot.gear = 1;
 	world._nextWhichRobotState(0);
 	var position = world.getPosition(robot);
 	//Then
 	ok( position.x === 1 , " eh les gars ! on a retrouvé Maurice ! ");
-	ok( position.y === 0 , " eh ouais, c'est bien Maurice! ");	
+	ok( position.y === 0 , " eh ouais, c'est bien Maurice! ");
 });
 
 test( "Rotating to east",function() {
@@ -54,7 +54,7 @@ test( "Rotating to east",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 1,1 , FACING_NORTH);
+	world.addRobot(robot, 1,1 , FACING_NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -69,7 +69,7 @@ test( "Rotating to west",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 10, 20 , FACING_NORTH);
+	world.addRobot(robot, 10, 20 , FACING_NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_COUNTERCLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -84,7 +84,7 @@ test( "u turn to facing south",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , FACING_NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_UTURN;
 	world._nextWhichRobotState(0);
@@ -99,7 +99,7 @@ test( "from east to north",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_WEST);
+	world.addRobot(robot, 2, 2 , FACING_WEST);
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
 	var position = world.getPosition(robot);
@@ -112,7 +112,7 @@ test( "rear gear seeing north",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , FACING_NORTH);
 	robot.gear = MOVING_REWARD;
 	world._nextWhichRobotState(0);
 	var position = world.getPosition(robot);
@@ -125,7 +125,7 @@ test( "robot's registers are reseted at next state",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , FACING_NORTH);
 	robot.gear = MOVING_REWARD;
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -139,7 +139,7 @@ test( "programming robot move foward",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , FACING_NORTH);
 	robot.ram = ['moveFoward'];
 	robot.execute();
 	world._nextWhichRobotState(0);
@@ -157,11 +157,12 @@ test( "programming robot move foward , turn right, move foward",function() {
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.add(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , FACING_NORTH);
 	robot.ram = ['moveFoward' , 'turnLeft' , 'moveReward'];
 	for (var i = robot.ram.length ; i > 0  ; i--) {
-		robot.execute();
-		world._nextWhichRobotState(0);
+		/*robot.execute();
+		world._nextWhichRobotState(0);*/
+		world.nextState();
 	}
 	//Then
 	var position = world.getPosition(robot);
@@ -169,4 +170,26 @@ test( "programming robot move foward , turn right, move foward",function() {
 	equal( position.y , 1 , " y didn't change");
 	equal( robot.gear , MOVING_NO , " not moving ");
 	equal( robot.rotating , MOVING_NO , " not rotating ");
+});
+
+test( "Adding walls to a world", function() {
+
+	//Given
+	var world = new World();
+	var WALL_1_X = 10;
+	var WALL_1_Y = 20;
+	var WALL_2_X = 30;
+	var WALL_2_Y = 40;
+	var WALL_3_X = 50;
+	var WALL_3_Y = 60;
+
+	//When
+	world.addWall(WALL_1_X, WALL_1_Y);
+	world.addWall(WALL_2_X, WALL_2_Y);
+
+	//Then
+	ok( world.isWalled(WALL_1_X, WALL_1_Y), "Wall 1 found");
+	ok( world.isWalled(WALL_2_X, WALL_2_Y), "Wall 2 found");
+	ok( world.isWalled(WALL_3_X, WALL_3_Y) == false, "Wall 3 not found");
+
 });

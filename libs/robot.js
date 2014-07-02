@@ -63,8 +63,9 @@ function World() {
 	var self = {
 
 		robots: [],
+		walls: [],
 		positions : [],
-		add: function(robot, at_x, at_y , at_o) {
+		addRobot: function(robot, at_x, at_y , at_o) {
 			this.robots.push( robot );
 			this.positions.push( {
 				x : at_x,
@@ -97,14 +98,27 @@ function World() {
 			this.positions[which].y += orientation.dy * robot.gear;
 			robot.clearPorts();
 		},
-/*		nextState : function() {
+		nextState : function() {
 			for (var which in this.robots ) {
 				if (robots.hasOwnProperty(which)) {
+					robots[which].execute();
+					this._nextWhichRobotState();
 
 				}
 			}
+		},
+		typeOfDalles : {
+			neutral : { willDie : false , canAccess : true, dx :0 , dy :0  },
+			deadly : {willDie : true},
+			wall : {canAccess : false},
+			tapisRoulantNord : {dy : -1},
+			start : {},
+			finish : { willFinish : true },
+		},
+		carte : [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
+		addWall : function(x, y) {
+			self.walls.push({x : x, y : y});
 		}
-*/
 	};
 
 	return self;
