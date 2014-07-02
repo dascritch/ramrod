@@ -73,6 +73,15 @@ function World() {
 		carte : [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
 		addWall : function(x, y) {
 			self.walls.push({x : x, y : y});
+		},
+		isWalled : function(x, y){
+			for ( var i in self.walls) {
+				var wall = self.walls[i];
+				if ( (wall.x === x) && (wall.y === y)) {
+					return true;
+				}
+			} 
+			return false;
 		}
 	};
 

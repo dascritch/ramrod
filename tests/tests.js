@@ -190,6 +190,6 @@ test( "Adding walls to a world", function() {
 	//Then
 	ok( world.isWalled(WALL_1_X, WALL_1_Y), "Wall 1 found");
 	ok( world.isWalled(WALL_2_X, WALL_2_Y), "Wall 2 found");
-	ok( world.isWalled(WALL_3_X, WALL_3_Y) == false, "Wall 3 not found");
+	ok( !world.isWalled(WALL_3_X, WALL_3_Y) , "Wall 3 not found");
 
 });
