@@ -1,17 +1,17 @@
 'use strict';
 
-const ROTATING_CLOCKWISE = 1;
-const ROTATING_NO = 0;
-const ROTATING_COUNTERCLOCKWISE = -1;
-const ROTATING_UTURN = 2;
-const MOVING_FOWARD = 1;
-const MOVING_NO = 0;
-const MOVING_REWARD = -1;
+var ROTATING_CLOCKWISE = 1;
+var ROTATING_NO = 0;
+var ROTATING_COUNTERCLOCKWISE = -1;
+var ROTATING_UTURN = 2;
+var MOVING_FOWARD = 1;
+var MOVING_NO = 0;
+var MOVING_REWARD = -1;
 
-const FACING_NORTH = 0;
-const FACING_EAST = 1;
-const FACING_SOUTH = 2;
-const FACING_WEST = 3;
+var FACING_NORTH = 0;
+var FACING_EAST = 1;
+var FACING_SOUTH = 2;
+var FACING_WEST = 3;
 
 function Robot() {
 
