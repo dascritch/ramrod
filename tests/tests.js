@@ -193,3 +193,25 @@ test( "Adding walls to a world", function() {
 	ok( !world.isWalled(WALL_3_X, WALL_3_Y) , "Wall 3 not found");
 
 });
+
+
+test( "bumping in the wall", function() {
+
+	//Given
+	var world = new World();
+	var robot = new Robot();
+	//When
+	world.addWall(2, 2);
+	world.addRobot(robot, 2, 3 , FACING_NORTH);
+	robot.ram = ['moveFoward'];
+	world.nextState();
+	//Then
+	var position = world.getPosition(robot);
+	equal( position.x , 2 , " not moving laterally");
+	equal( position.y , 3 , " stopped by the wall");
+
+	robot.ram = ['moveReward'];
+	world.nextState();
+	equal( position.x , 2 , " moving laterally");
+	equal( position.y , 4 , " not vertically");
+});

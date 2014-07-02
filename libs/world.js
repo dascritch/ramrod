@@ -49,8 +49,12 @@ function World() {
 				: ( o % count_directions );
 			var orientation = directions[o];
 			this.positions[which].o = o;
-			this.positions[which].x += orientation.dx * robot.gear;
-			this.positions[which].y += orientation.dy * robot.gear;
+			var future_x = this.positions[which].x + orientation.dx * robot.gear;
+			var future_y = this.positions[which].y + orientation.dy * robot.gear;
+			if (! this.isWalled(future_x,future_y)) { 
+				this.positions[which].x = future_x;
+				this.positions[which].y = future_y;
+			}
 			robot.clearPorts();
 		},
 		nextState : function() {
@@ -62,15 +66,19 @@ function World() {
 				}
 			}
 		},
+		defaultDalle : {
+			willDie		: false,
+			canAccess	: true,
+			dx			: 0,
+			dy			: 0
+		},
 		typeOfDalles : {
-			neutral : { willDie : false , canAccess : true, dx :0 , dy :0  },
 			deadly : {willDie : true},
 			wall : {canAccess : false},
 			tapisRoulantNord : {dy : -1},
 			start : {},
 			finish : { willFinish : true },
 		},
-		carte : [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]],
 		addWall : function(x, y) {
 			self.walls.push({x : x, y : y});
 		},
