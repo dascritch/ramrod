@@ -18,8 +18,8 @@ function World() {
 	var self = {
 
 		robots: [],
-		walls: [],
 		positions : [],
+		slabs : [],
 		addRobot: function(robot, at_x, at_y , at_o) {
 			this.robots.push( robot );
 			this.positions.push({
@@ -62,39 +62,35 @@ function World() {
 				if (this.robots.hasOwnProperty(which)) {
 					this.robots[which].execute();
 					this._nextWhichRobotState(which);
-
 				}
 			}
 		},
-		defaultDalle : {
+		defaultSlab : {
 			willDie		: false,
 			canAccess	: true,
 			dx			: 0,
 			dy			: 0
 		},
-		typeOfDalles : {
-			deadly : {willDie : true},
-			wall : {canAccess : false},
-			tapisRoulantNord : {dy : -1},
-			start : {},
-			finish : { willFinish : true },
+		typeOfSlabs : {
+			'start'					: {},
+			'finish'				: {willFinish : true },
+			'wall'					: {canAccess : false},
+			'deadly'				: {willDie : true},
+			'conveyorBeltToNorth'	: { dy : -1 },
+		},
+		coordinatesToKey : function(x,y) {
+			return x.toString()+','+y.toString();
+		},
+		declareSlab : function(type, x, y) {
+			self.slabs[this.coordinatesToKey(x, y)] = type;
 		},
 		addWall : function(x, y) {
-			self.walls.push({x : x, y : y});
+			this.declareSlab('wall',x,y)
 		},
 		isWalled : function(x, y){
-			for ( var i in self.walls) {
-				var wall = self.walls[i];
-				if ( (wall.x === x) && (wall.y === y)) {
-					return true;
-				}
-			} 
-			return false;
+			return self.slabs[this.coordinatesToKey(x, y)] === 'wall';
 		}
 	};
 
 	return self;
-
 }
-
-

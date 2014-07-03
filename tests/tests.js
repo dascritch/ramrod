@@ -15,7 +15,7 @@ test( "World initialisation",function() {
 
 	//Then
 	ok( world.robots.length === 0, "New worlds have no robots");
-	ok( world.walls.length === 0, "New worlds have no robots");
+	ok( world.slabs.length === 0, "New worlds have no robots");
 
 });
 
@@ -230,3 +230,8 @@ test( "bumping in the wall", function() {
 	equal( position.x , 2 , " laterally");
 	equal( position.y , 4 , " vertically");
 });
+
+test ('coordinates x and y to a string for key' , function() {
+	var world = new World();
+	equal(world.coordinatesToKey(5,-9) , '5,-9' , "ok for syntax");
+})
