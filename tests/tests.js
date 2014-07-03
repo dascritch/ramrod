@@ -233,5 +233,38 @@ test( "bumping in the wall", function() {
 
 test ('coordinates x and y to a string for key' , function() {
 	var world = new World();
-	equal(world.coordinatesToKey(5,-9) , '5,-9' , "ok for syntax");
-})
+	equal(world._coordinatesToKey(5,-9) , '5,-9' , "ok for syntax");
+});
+
+test( "invalid Declare Slab", function() {
+	//Given
+	var world = new World();
+	//When
+	ok( !world.declareSlab('inexisting',2, 2) , "castorama doesnt have it" );
+	ok( !world.isSlab('inexisting',2,2) , " type of slab inexisting not instalable ");
+});
+
+test( "isFinished", function() {
+	//Given
+	var world = new World();
+	var robot = new Robot();
+	var position;
+	//When
+	world.declareSlab('finish',2, 2);
+	world.addRobot(robot, 2, 4 , FACING_NORTH);
+	ok( !robot.isFinished , " Robot not winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
+	robot.ram = ['moveFoward','moveFoward'];
+
+	world.nextState();
+	ok( !robot.isFinished , " Robot not winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
+
+	world.nextState();
+	position = world.getPosition(robot);
+	equal( position.x , 2 , " laterally");
+	equal( position.y , 2 , " vertically");
+	ok( robot.isFinished , " This robot has finished ");
+	ok( world.isFinished , " Not a single winner yet ");
+
+});

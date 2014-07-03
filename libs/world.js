@@ -17,9 +17,45 @@ function World() {
 
 	var self = {
 
+		slabs : [],
+		_coordinatesToKey : function(x,y) {
+			return x.toString()+','+y.toString();
+		},
+
+		defaultSlab : {
+			willDie		: false,
+			canAccess	: true,
+			dx			: 0,
+			dy			: 0
+		},
+		typeOfSlabs : {
+			'start'					: {},
+			'finish'				: {willFinish : true },
+			'wall'					: {canAccess : false},
+			'deadly'				: {willDie : true},
+			'conveyorBeltToNorth'	: { dy : -1 },
+		},
+
+		declareSlab : function(type, x, y) {
+			if ( type in this.typeOfSlabs) {
+				self.slabs[this._coordinatesToKey(x, y)] = type;
+				return true;
+			}
+			return false;
+		},
+		addWall : function(x, y) {
+			this.declareSlab('wall',x,y)
+		},
+		isSlab : function(type,x,y) {
+			return self.slabs[this._coordinatesToKey(x, y)] === type;
+		},
+		isWalled : function(x, y){
+			return self.isSlab( 'wall' , x,y);
+		},
+
 		robots: [],
 		positions : [],
-		slabs : [],
+		
 		addRobot: function(robot, at_x, at_y , at_o) {
 			this.robots.push( robot );
 			this.positions.push({
@@ -40,6 +76,9 @@ function World() {
 				};
 			}
 		},
+
+		isFinished : false,
+
 		_nextWhichRobotState : function(which) {
 			var robot = this.robots[which];
 			var o = this.positions[which].o;
@@ -55,6 +94,12 @@ function World() {
 				this.positions[which].x = future_x;
 				this.positions[which].y = future_y;
 			}
+
+			if (this.isSlab( 'finish' , future_x , future_y)) {
+				robot.isFinished = true;
+				this.isFinished = true;
+			}
+
 			robot.clearPorts();
 		},
 		nextState : function() {
@@ -65,31 +110,7 @@ function World() {
 				}
 			}
 		},
-		defaultSlab : {
-			willDie		: false,
-			canAccess	: true,
-			dx			: 0,
-			dy			: 0
-		},
-		typeOfSlabs : {
-			'start'					: {},
-			'finish'				: {willFinish : true },
-			'wall'					: {canAccess : false},
-			'deadly'				: {willDie : true},
-			'conveyorBeltToNorth'	: { dy : -1 },
-		},
-		coordinatesToKey : function(x,y) {
-			return x.toString()+','+y.toString();
-		},
-		declareSlab : function(type, x, y) {
-			self.slabs[this.coordinatesToKey(x, y)] = type;
-		},
-		addWall : function(x, y) {
-			this.declareSlab('wall',x,y)
-		},
-		isWalled : function(x, y){
-			return self.slabs[this.coordinatesToKey(x, y)] === 'wall';
-		}
+		
 	};
 
 	return self;

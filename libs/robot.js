@@ -12,6 +12,8 @@ var MOVING_REWARD = -1;
 function Robot() {
 
 	var self = {
+		isFinished : false,
+
 		gear : MOVING_NO,
 		rotating : ROTATING_NO,
 		clearPorts : function() {
@@ -37,12 +39,7 @@ function Robot() {
 			this.procedures[this.ram.shift()]();
 		}
 	};
-/*
-nom_de_linstruction = 'turnLeft';
-self.instruction[nom_de_linstruction]()*/
-
-
+	
 	return self;
-
 }
 
