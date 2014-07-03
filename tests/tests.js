@@ -194,24 +194,39 @@ test( "Adding walls to a world", function() {
 
 });
 
-
-test( "bumping in the wall", function() {
-
+test( "walls outside path aren't interfering", function() {
 	//Given
 	var world = new World();
 	var robot = new Robot();
 	//When
-	world.addWall(2, 2);
+	world.addWall(10, 2);
 	world.addRobot(robot, 2, 3 , FACING_NORTH);
 	robot.ram = ['moveFoward'];
 	world.nextState();
 	//Then
 	var position = world.getPosition(robot);
 	equal( position.x , 2 , " not moving laterally");
+	equal( position.y , 2 , " stopped by the wall");
+});
+
+test( "bumping in the wall", function() {
+	//Given
+	var world = new World();
+	var robot = new Robot();
+	var position;
+	//When
+	world.addWall(2, 2);
+	world.addRobot(robot, 2, 3 , FACING_NORTH);
+	robot.ram = ['moveFoward'];
+	world.nextState();
+	//Then
+	position = world.getPosition(robot);
+	equal( position.x , 2 , " not moving laterally");
 	equal( position.y , 3 , " stopped by the wall");
 
 	robot.ram = ['moveReward'];
 	world.nextState();
-	equal( position.x , 2 , " moving laterally");
-	equal( position.y , 4 , " not vertically");
+	position = world.getPosition(robot);
+	equal( position.x , 2 , " laterally");
+	equal( position.y , 4 , " vertically");
 });
