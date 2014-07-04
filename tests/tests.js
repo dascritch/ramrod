@@ -261,10 +261,29 @@ test( "isFinished", function() {
 	ok( !world.isFinished , " Not a single winner yet ");
 
 	world.nextState();
-	position = world.getPosition(robot);
-	equal( position.x , 2 , " laterally");
-	equal( position.y , 2 , " vertically");
 	ok( robot.isFinished , " This robot has finished ");
 	ok( world.isFinished , " Not a single winner yet ");
+});
 
+test( "no more moves when play finished", function() {
+	//Given
+	var world = new World();
+	var robot = new Robot();
+	var position;
+	//When
+	world.declareSlab('finish',2, 2);
+	world.addRobot(robot, 2, 4 , FACING_NORTH);
+	ok( !robot.isFinished , " Robot not winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
+	robot.ram = ['moveFoward','moveFoward','moveFoward'];
+
+	world.nextState();
+	ok( !robot.isFinished , " Robot not winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
+
+	world.nextState();
+	world.nextState();
+	position = world.getPosition(robot);
+	equal( position.x , 2 , "horizontal");
+	equal( position.y , 2 , "vertical");
 });

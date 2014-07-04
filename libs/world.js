@@ -81,6 +81,9 @@ function World() {
 
 		_nextWhichRobotState : function(which) {
 			var robot = this.robots[which];
+			if (robot.isFinished) {
+				return ;
+			}
 			var o = this.positions[which].o;
 			o += robot.rotating;
 			o = ( o < 0 )
@@ -103,6 +106,9 @@ function World() {
 			robot.clearPorts();
 		},
 		nextState : function() {
+			if (this.isFinished) {
+				return ;
+			}
 			for (var which in this.robots ) {
 				if (this.robots.hasOwnProperty(which)) {
 					this.robots[which].execute();
