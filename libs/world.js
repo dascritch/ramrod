@@ -55,7 +55,7 @@ function World() {
 
 		robots: [],
 		positions : [],
-		
+
 		addRobot: function(robot, at_x, at_y , at_o) {
 			this.robots.push( robot );
 			this.positions.push({
@@ -93,7 +93,7 @@ function World() {
 			this.positions[which].o = o;
 			var future_x = this.positions[which].x + orientation.dx * robot.gear;
 			var future_y = this.positions[which].y + orientation.dy * robot.gear;
-			if (! this.isWalled(future_x,future_y)) { 
+			if (! this.isWalled(future_x,future_y)) {
 				this.positions[which].x = future_x;
 				this.positions[which].y = future_y;
 			}
@@ -116,7 +116,7 @@ function World() {
 				}
 			}
 		},
-		
+
 	};
 
 	return self;
