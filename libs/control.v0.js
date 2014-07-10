@@ -11,6 +11,8 @@ function Control() {
 			'moveReward'	: '↓',
 			'noOperation'	: '…',
 		},
+		ramLength : 0,
+
 		build : function (Game) {
 			var cl = self.paletteClassnamePrefix;
 
@@ -24,6 +26,8 @@ function Control() {
 				$palette.append( '<li class="'+cl+command+'">'+self.paletteSymbols[command]+' '+command+'</li>' );
 			}
 
+			self.ramLength = Game.playerRobotRamLength;
+
 			function preExecute() {
 				$('.remove-command').remove();
 				$('#palette').hide();
@@ -33,8 +37,9 @@ function Control() {
 
 			document.getElementById('execute').addEventListener('click',preExecute);
 			$palette.on('click','li', self.addCommandInStack );
-			$('#instructions').on('click','.remove-command', self.removeCommandInStack );
+			$('#instructions').on('click','.remove-command', self.removeCommandInStack , Game );
 		},
+
 		listCommandInStack : function() {
 			var stack = [];
 			$('#instructions li').each(function() {
@@ -43,12 +48,17 @@ function Control() {
 			return stack;
 		},
 		addCommandInStack : function() {
+			if ($('#instructions li').size() >= self.ramLength) {
+				alert('TOO MUCH');
+				return ;
+			}
 			var $li = $(this).clone().append('<button type="button" class="remove-command">×</button>');
 		 	$('#instructions').append($li);
 		},
 		removeCommandInStack : function() {
 			$(this).closest('li').remove();
 		},
+
 		execute : function(Game) {
 			//alert('e000');
 		},

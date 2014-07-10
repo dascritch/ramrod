@@ -18,6 +18,7 @@
 			this.events[triggerName].push(launchFunction);
 		},
 		playerRobotRam : [],
+		playerRobotRamLength : 6
 	};
 
 	var internal = {};

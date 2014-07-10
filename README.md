@@ -2,23 +2,29 @@ Ramrod's lost memories
 ======================
 
 Authors :
-* [Fabien Tregan]()
+* [Fabien Tregan](https://twitter.com/ftregan)
 * [Xavier "dascritch" Mouton-Dubosc](http://dascritch.com)
 
-Version : 0.1
+Version : 0.1 (still ALPHA, milestone 0.1 when interfaces and first level designed)
 
 Purpose
 -------
 
-Telecommanding a bot is a limited bank of registers. Please, upgrade it.
+Telecommanding a bot with a limited bank of commands. Please, upgrade it.
 
 Features
 --------
 
 A bot.
+A goal.
 A playground.
-Full of dangers
+Full of dangers…
 
+Thanks
+------
+* People at Code And Coffee Toulouse
+* Board games of our childhood (especially RoboRally)
+* [Nolife](http://nolife-tv.com)
 
 Licence
 -------
