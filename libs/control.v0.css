@@ -12,13 +12,13 @@
 	display : inline-block;
 }
 
-#control li , #execute {
+#control li , #control button {
 	display : inline-block;
 	margin : 4px;
 	padding : 4px;
 	width : 100px;
 	height : 100px;
-	border-radius :4px;
+	border-radius :8px;
 }
 
 #control li {
@@ -33,13 +33,12 @@
 	margin : 0 auto;
 	font-size : 55px;
 }
-#control li button {
-	position : absolute;
-	top : 0px;
-	right : 0px;
-}
-
 #execute {
 	background : red;
 	color : white ;
+}
+
+#backspace {
+	background : yellow;
+	color : red;
 }

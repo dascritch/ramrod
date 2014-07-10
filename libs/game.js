@@ -27,7 +27,8 @@
 				'moveReward'	: 'move reward',
 				'noOperation'	: 'no operation',
 			},
-			executeCommands : 'Execute !'
+			removeLastCommand	: 'Remove',
+			executeCommands		: 'Execute !'
 		}
 	};
 
