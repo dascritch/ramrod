@@ -4,6 +4,13 @@ function Control(Game) {
 
 	var self = {
 		paletteClassnamePrefix : 'control-',
+		paletteSymbols : {
+			'turnLeft'		: '↶',
+			'moveFoward'	: '↑',
+			'turnRight'	: '↷',
+			'moveReward'	: '↓',
+			'nothing'	: '0',
+		},
 		build : function (Game) {
 /*
 			var view = new XMLHttpRequest();
@@ -11,15 +18,13 @@ function Control(Game) {
 			view.send();
 */
 			var cl = self.paletteClassnamePrefix;
+			var palette = '';
+			for (var command in self.paletteSymbols) {
+				palette += '<li class="'+cl+command+'">'+self.paletteSymbols[command]+'</li>';
+			}
 			element.innerHTML = /*view.responseText*/ '\
-				<ul id="palette">\
-					<li class="'+cl+'turnLeft">↶</li>\
-					<li class="'+cl+'moveFoward">↑</li>\
-					<li class="'+cl+'turnRight">↷</li>\
-					<li class="'+cl+'moveReward">↓</li>\
-				</ul>\
-				<ol id="instructions">\
-				</ol>\
+				<ul id="palette">'+palette+'</ul>\
+				<ol id="instructions"></ol>\
 				<button id="execute">Execute</button>\
 			';
 			document.getElementById('execute').addEventListener('click',self.preExecute);
