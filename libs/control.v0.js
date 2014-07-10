@@ -22,7 +22,16 @@ function Control(Game) {
 			';
 			document.getElementById('execute').addEventListener('click',function() {
 				 Game.trigger('execute');
-			})
+			});
+			$('#palette').on('click','li', self.addCommandInStack );
+			$('#instructions').on('click','.remove-command', self.removeCommandInStack );
+		},
+		addCommandInStack : function() {
+			var $li = $(this).clone().append('<button type="button" class="remove-command">×</button>');
+		 	$('#instructions').append($li);
+		},
+		removeCommandInStack : function() {
+			$(this).closest('li').remove();
 		},
 		execute : function(Game) {
 			alert('e000');
