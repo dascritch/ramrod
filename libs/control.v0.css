@@ -1,0 +1,22 @@
+#control {
+	margin :0;
+	padding: 0;
+	width : 100%;
+	background : grey;
+	position : absolute ;
+	bottom : 0;
+
+}
+
+#palette {
+	background : black;
+}
+
+#control li {
+	display : inline-block;
+	background : white;
+	margin : 4px;
+	padding : 4px;
+	width : 100px;
+	height : 100px;
+}
