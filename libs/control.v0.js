@@ -12,7 +12,7 @@ function Control() {
 			'noOperation'	: '…',
 		},
 		ramLength : 0,
-		tileEmptyInStack : '<li class="notyet">?</li>',
+		tileEmptyInStack : '<li class="notyet"><b>?</b></li>',
 
 		build : function (Game) {
 			var cl = self.paletteClassnamePrefix;
@@ -20,13 +20,16 @@ function Control() {
 			element.innerHTML = /*view.responseText*/ '\
 				<ul id="palette"></ul>\
 				<ol id="instructions"></ol>\
-				<button id="backspace"><b>⌫</b>'+ Game.i18n.removeLastCommand +'</button>\
-				<button id="execute">'+ Game.i18n.executeCommands +'</button>\
+				<button id="backspace"><b>⌫</b><span>'+ Game.i18n.removeLastCommand +'</span></button>\
+				<button id="execute"><b>⎆</b><span>'+ Game.i18n.executeCommands +'</span></button>\
 			';
 			var $palette = $('#palette');
 			var $instructions = $('#instructions');
 			for (var command in self.paletteSymbols) {
-				$palette.append( '<li class="'+cl+command+'"><b>'+self.paletteSymbols[command]+'</b> '+Game.i18n.commands[command]+'</li>' );
+				$palette.append( '<li class="'+cl+command+'">'+
+									'<b>'+self.paletteSymbols[command]+'</b>'+
+									'<span>'+Game.i18n.commands[command]+'</<span>'+
+								'</li>' );
 			}
 
 			self.ramLength = Game.playerRobotRamLength;

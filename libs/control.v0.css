@@ -51,3 +51,20 @@
 	background : yellow;
 	color : red;
 }
+
+@media all and (max-width: 849px)
+{
+	#control span {
+		display : none;
+	}
+
+	#control li , #control button {
+		width : 50px;
+		height : 50px;
+		border-radius :4px;
+	}
+
+	#control li b {
+		font-size : 25px;
+	}
+}
