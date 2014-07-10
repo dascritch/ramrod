@@ -19,11 +19,11 @@ function Control() {
 			element.innerHTML = /*view.responseText*/ '\
 				<ul id="palette"></ul>\
 				<ol id="instructions"></ol>\
-				<button id="execute">Execute</button>\
+				<button id="execute">'+ Game.i18n.executeCommands +'</button>\
 			';
 			var $palette = $('#palette');
 			for (var command in self.paletteSymbols) {
-				$palette.append( '<li class="'+cl+command+'">'+self.paletteSymbols[command]+' '+command+'</li>' );
+				$palette.append( '<li class="'+cl+command+'">'+self.paletteSymbols[command]+' '+Game.i18n.commands[command]+'</li>' );
 			}
 
 			self.ramLength = Game.playerRobotRamLength;

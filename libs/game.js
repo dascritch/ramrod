@@ -18,7 +18,17 @@
 			this.events[triggerName].push(launchFunction);
 		},
 		playerRobotRam : [],
-		playerRobotRamLength : 6
+		playerRobotRamLength : 6,
+		i18n : {
+			commands: {
+				'turnLeft'		: 'turn left',
+				'moveFoward'	: 'move foward',
+				'turnRight'		: 'turn right',
+				'moveReward'	: 'move reward',
+				'noOperation'	: 'no operation',
+			},
+			executeCommands : 'Execute !'
+		}
 	};
 
 	var internal = {};
