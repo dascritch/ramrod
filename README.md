@@ -5,7 +5,7 @@ Authors :
 * [Fabien Tregan](https://twitter.com/ftregan)
 * [Xavier "dascritch" Mouton-Dubosc](http://dascritch.com)
 
-Version : 0.1 (still ALPHA, milestone 0.1 when interfaces and first level designed)
+[Actual version 0.1 still ALPHA](http://dascritch.github.io/ramrod/) (milestone 0.1 when interfaces and first level designed)
 
 Purpose
 -------
