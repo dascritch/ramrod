@@ -19,23 +19,14 @@
 		},
 		playerRobotRam : [],
 		playerRobotRamLength : 6,
-		i18n : {
-			commands: {
-				'turnLeft'		: 'turn left',
-				'moveFoward'	: 'move foward',
-				'turnRight'		: 'turn right',
-				'moveReward'	: 'move reward',
-				'noOperation'	: 'no operation',
-			},
-			removeLastCommand	: 'Remove',
-			executeCommands		: 'Execute !'
-		}
+		i18n : {}
 	};
 
 	var internal = {};
 	internal.control = new Control();
 	internal.player = new Robot();
 	internal.world = new World();
+	internal.i18n = new i18n();
 	for (var item in internal) {
 		internal[item].init(self);
 	}

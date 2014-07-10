@@ -93,11 +93,14 @@ function Control() {
 		execute : function(Game) {
 			//alert('e000');
 		},
-
+		levelWin : function(Game) {
+			$('#control').empty().html(Game.i18n.youWin+'<p><button id="nextlevel">'+Game.i18n.goNextLevel+'</button></p>')
+		},
 		init : function(Game) {
 			Game.addTrigger('start', self.build);
 			Game.addTrigger('start', self.canEdit);
 			Game.addTrigger('execute', self.execute);
+			Game.addTrigger('levelWin', self.levelWin);
 		}
 	}
 
