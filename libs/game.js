@@ -19,10 +19,12 @@ function game() {
 		},
 		playerRobotRam : [],
 	};
-	self.player = new Robot(self);
-	self.playingRobots = [ self.player ];
-	self.world = new World(self);
-	self.control = new Control(self);
+
+	var player = new Robot(self);
+	var playingRobots = [ self.player ];
+	var world = new World(self);
+	var control = new Control(self);
+
 	self.trigger('start');
 	return self;
 }
