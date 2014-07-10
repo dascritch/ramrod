@@ -7,6 +7,15 @@
 	bottom : 0;
 }
 
+#control * {
+	transition-property : opacity background color max-height transform ;
+	-moz-transition-property: opacity background color max-height transform ;
+	-webkit-transition-property: opacity background color max-height transform ;
+	transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	-webkit-transition-duration: 0.5s;
+}
+
 #instructions {
 	background : black;
 	display : inline-block;
@@ -34,12 +43,23 @@
 	font-size : 55px;
 }
 
-#control button , #control #palette  {
-	opacity : 0.1;
+#control button  {
+	opacity : 0;
+	pointer-events : none ;
+}
+
+#control #palette {
+	max-height : 0px;
+	pointer-events : none ;
 }
 
 #control.editable button , #control.editable #palette {
 	opacity : 1;
+	pointer-events : auto;
+}
+
+#control.editable #palette {
+	max-height : 150px;
 }
 
 #control .activeCommand {

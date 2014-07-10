@@ -17,8 +17,13 @@
 			}
 			this.events[triggerName].push(launchFunction);
 		},
+
 		playerRobotRam : [],
 		playerRobotRamLength : 6,
+
+		actualMoveInSequence : 0,
+		totalMovesInLevel : 0,
+
 		i18n : {}
 	};
 

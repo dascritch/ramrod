@@ -93,6 +93,13 @@ function Control() {
 		execute : function(Game) {
 			//alert('e000');
 		},
+		executeMove : function(Game) {
+			$('.activeCommand').removeClass('activeCommand');
+		 	$('#instructions li').eq(Game.actualMoveInSequence).addClass('activeCommand');
+		},
+		executeMyMove : function(Game) {
+			// Game.totalMovesInLevel;
+		},
 		levelWin : function(Game) {
 			$('#control').empty().html(Game.i18n.youWin+'<p><button id="nextlevel">'+Game.i18n.goNextLevel+'</button></p>')
 		},
