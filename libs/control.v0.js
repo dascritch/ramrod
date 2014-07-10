@@ -49,11 +49,17 @@ function Control() {
 			$('#backspace').on('click', self.removeCommandInStack );
 		},
 
+		updateCursor : function() {
+			$('.activeCommand').removeClass('activeCommand');
+		 	$('#instructions li.notyet').eq(0).addClass('activeCommand');
+		 },
 		canEdit : function() {
 			$(element).addClass('editable')
+			self.updateCursor();
 		},
 		cannotEdit : function() {
 			$(element).removeClass('editable')
+			$('.activeCommand').removeClass('activeCommand');
 		},
 		listCommandInStack : function() {
 			var stack = [];
@@ -63,19 +69,23 @@ function Control() {
 			return stack;
 		},
 		addCommandInStack : function() {
-			if ($('#instructions li[class!="notyet"]').size() >= self.ramLength) {
+			if ($('#instructions li.yet').size() >= self.ramLength) {
 				alert('TOO MUCH');
 				return ;
 			}
 			var $li = $(this).clone();
+			$li.addClass('yet');
 		 	$('#instructions li.notyet').eq(0).replaceWith($li);
-		 	if ($('#instructions li[class!="notyet"]').size() == self.ramLength) {
+		 	self.updateCursor();
+		 	if ($('#instructions li.yet').size() == self.ramLength) {
 		 		$('#palette').hide();
 		 	}
 		},
 		removeCommandInStack : function() {
-			$('#instructions li[class!="notyet"]:last').replaceWith(self.tileEmptyInStack);
-			if ($('#instructions li[class!="notyet"]').size() < self.ramLength) {
+			$('#instructions li.yet:last').replaceWith(self.tileEmptyInStack);
+			self.updateCursor();
+
+			if ($('#instructions li.yet').size() < self.ramLength) {
 		 		$('#palette').show();
 		 	}
 		},

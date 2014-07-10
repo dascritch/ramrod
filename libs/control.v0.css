@@ -42,6 +42,10 @@
 	opacity : 1;
 }
 
+#control .activeCommand {
+	outline : 4px solid yellow;
+}
+
 #execute {
 	background : red;
 	color : white ;
