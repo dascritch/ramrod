@@ -23,7 +23,7 @@ function Control() {
 			';
 			var $palette = $('#palette');
 			for (var command in self.paletteSymbols) {
-				$palette.append( '<li class="'+cl+command+'">'+self.paletteSymbols[command]+' '+Game.i18n.commands[command]+'</li>' );
+				$palette.append( '<li class="'+cl+command+'"><b>'+self.paletteSymbols[command]+'</b> '+Game.i18n.commands[command]+'</li>' );
 			}
 
 			self.ramLength = Game.playerRobotRamLength;

@@ -22,7 +22,21 @@
 }
 
 #control li {
+	position : relative;
+	text-align : center;
 	background : white;
+	font-size : 11px;
+}
+
+#control li b {
+	display : block;
+	margin : 0 auto;
+	font-size : 55px;
+}
+#control li button {
+	position : absolute;
+	top : 0px;
+	right : 0px;
 }
 
 #execute {
