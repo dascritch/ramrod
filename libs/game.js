@@ -3,9 +3,7 @@
 function game() {
 
 	var self = {
-		displayWorld	: document.getElementById('world'),
-		displayControl	: document.getElementById('control'),
-		events 			: { 'pushNextStateButton' :  [ self.world.nextState ] },
+		events 			: { /*'pushNextStateButton' :  [ self.world.nextState ]*/ },
 		trigger 		: function(triggerName) {
 			if (self.events[triggerName] !== undefined) {
 				for(var index in self.events[triggerName]) {
@@ -14,13 +12,17 @@ function game() {
 			}
 		},
 		addTrigger		: function(triggerName,launchFunction) {
-			this.events[triggerName].push(index);
+			if (this.events[triggerName] === undefined) {
+				this.events[triggerName] = [];
+			}
+			this.events[triggerName].push(launchFunction);
 		}
 	};
 	self.player = new Robot(self);
 	self.playingRobots = [ self.player ];
 	self.world = new World(self);
-
+	self.control = new Control(self);
+	self.trigger('start');
 	return self;
 }
 
