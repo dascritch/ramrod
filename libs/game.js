@@ -21,7 +21,7 @@ function game() {
 	};
 
 	var player = new Robot(self);
-	var playingRobots = [ self.player ];
+	var playingRobots = [ player ];
 	var world = new World(self);
 	var control = new Control(self);
 
