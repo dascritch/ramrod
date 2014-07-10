@@ -16,7 +16,8 @@ function game() {
 				this.events[triggerName] = [];
 			}
 			this.events[triggerName].push(launchFunction);
-		}
+		},
+		playerRobotRam : [],
 	};
 	self.player = new Robot(self);
 	self.playingRobots = [ self.player ];
