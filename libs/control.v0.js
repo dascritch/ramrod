@@ -1,4 +1,4 @@
-function Control(Game) {
+function Control() {
 
 	var element = document.getElementById('control');
 
@@ -27,7 +27,15 @@ function Control(Game) {
 				<ol id="instructions"></ol>\
 				<button id="execute">Execute</button>\
 			';
-			document.getElementById('execute').addEventListener('click',self.preExecute);
+
+			function preExecute() {
+				$('.remove-command').remove();
+				$('#palette').hide();
+				Game.playerRobotRam = self.listCommandInStack();
+				Game.trigger('execute');
+			}
+
+			document.getElementById('execute').addEventListener('click',preExecute);
 			$('#palette').on('click','li', self.addCommandInStack );
 			$('#instructions').on('click','.remove-command', self.removeCommandInStack );
 		},
@@ -45,18 +53,16 @@ function Control(Game) {
 		removeCommandInStack : function() {
 			$(this).closest('li').remove();
 		},
-		preExecute : function() {
-			$('.remove-command').remove();
-			$('#palette').hide();
-			Game.playerRobotRam = self.listCommandInStack();
-			Game.trigger('execute');
-		},
 		execute : function(Game) {
 			//alert('e000');
+		},
+
+		init : function(Game) {
+			Game.addTrigger('start', self.build);
+			Game.addTrigger('execute', self.execute);
 		}
 	}
 
-	Game.addTrigger('start', self.build);
-	Game.addTrigger('execute', self.execute);
+
 	return self;
 }

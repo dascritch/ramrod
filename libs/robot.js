@@ -37,7 +37,8 @@ function Robot() {
 		},
 		execute : function() {
 			this.procedures[this.ram.shift()]();
-		}
+		},
+		init : function(Game) {}
 	};
 	
 	return self;

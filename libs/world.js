@@ -116,7 +116,7 @@ function World() {
 				}
 			}
 		},
-
+		init : function(Game) {}
 	};
 
 	return self;

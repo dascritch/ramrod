@@ -1,6 +1,6 @@
 'use strict';
 
-function game() {
+(function Game() {
 
 	var self = {
 		events 			: { /*'pushNextStateButton' :  [ self.world.nextState ]*/ },
@@ -20,13 +20,17 @@ function game() {
 		playerRobotRam : [],
 	};
 
-	var player = new Robot(self);
-	var playingRobots = [ player ];
-	var world = new World(self);
-	var control = new Control(self);
+	var internal = {};
+	internal.control = new Control();
+	internal.player = new Robot();
+	internal.world = new World();
+	for (var item in internal) {
+		internal[item].init(self);
+	}
+
+	var playingRobots = [ internal.player ];
 
 	self.trigger('start');
 	return self;
-}
+})();
 
-var Game = new game();
