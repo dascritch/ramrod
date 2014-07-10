@@ -20,13 +20,13 @@ function Control() {
 			element.innerHTML = /*view.responseText*/ '\
 				<ul id="palette"></ul>\
 				<ol id="instructions"></ol>\
-				<button id="backspace"><b>⌫</b><span>'+ Game.i18n.removeLastCommand +'</span></button>\
-				<button id="execute"><b>⎆</b><span>'+ Game.i18n.executeCommands +'</span></button>\
+				<button id="backspace" title="'+ Game.i18n.removeLastCommand +'"><b>⌫</b><span>'+ Game.i18n.removeLastCommand +'</span></button>\
+				<button id="execute" title="'+ Game.i18n.executeCommands +'"><b>⎆</b><span>'+ Game.i18n.executeCommands +'</span></button>\
 			';
 			var $palette = $('#palette');
 			var $instructions = $('#instructions');
 			for (var command in self.paletteSymbols) {
-				$palette.append( '<li class="'+cl+command+'">'+
+				$palette.append( '<li class="'+cl+command+'" title="'+Game.i18n.commands[command]+'">'+
 									'<b>'+self.paletteSymbols[command]+'</b>'+
 									'<span>'+Game.i18n.commands[command]+'</<span>'+
 								'</li>' );

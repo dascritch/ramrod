@@ -8,9 +8,9 @@
 }
 
 #control * {
-	transition-property : opacity background color max-height transform ;
-	-moz-transition-property: opacity background color max-height transform ;
-	-webkit-transition-property: opacity background color max-height transform ;
+	transition-property : opacity , background , color , max-height , transform ;
+	-moz-transition-property :  opacity , background , color , max-height , transform ;
+	-webkit-transition-property :  opacity , background , color , max-height , transform ;
 	transition-duration: 0.5s;
 	-moz-transition-duration: 0.5s;
 	-webkit-transition-duration: 0.5s;
@@ -76,7 +76,7 @@
 	color : red;
 }
 
-@media all and (max-width: 849px)
+@media all and (max-width: 1023px)
 {
 	#control span {
 		display : none;
