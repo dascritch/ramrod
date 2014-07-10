@@ -7,26 +7,22 @@ function Control() {
 		paletteSymbols : {
 			'turnLeft'		: '↶',
 			'moveFoward'	: '↑',
-			'turnRight'	: '↷',
+			'turnRight'		: '↷',
 			'moveReward'	: '↓',
-			'nothing'	: '0',
+			'noOperation'	: '…',
 		},
 		build : function (Game) {
-/*
-			var view = new XMLHttpRequest();
-			view.open('GET', 'lib/control.v0.html' , false);
-			view.send();
-*/
 			var cl = self.paletteClassnamePrefix;
-			var palette = '';
-			for (var command in self.paletteSymbols) {
-				palette += '<li class="'+cl+command+'">'+self.paletteSymbols[command]+'</li>';
-			}
+
 			element.innerHTML = /*view.responseText*/ '\
-				<ul id="palette">'+palette+'</ul>\
+				<ul id="palette"></ul>\
 				<ol id="instructions"></ol>\
 				<button id="execute">Execute</button>\
 			';
+			var $palette = $('#palette');
+			for (var command in self.paletteSymbols) {
+				$palette.append( '<li class="'+cl+command+'">'+self.paletteSymbols[command]+' '+command+'</li>' );
+			}
 
 			function preExecute() {
 				$('.remove-command').remove();
@@ -36,7 +32,7 @@ function Control() {
 			}
 
 			document.getElementById('execute').addEventListener('click',preExecute);
-			$('#palette').on('click','li', self.addCommandInStack );
+			$palette.on('click','li', self.addCommandInStack );
 			$('#instructions').on('click','.remove-command', self.removeCommandInStack );
 		},
 		listCommandInStack : function() {
@@ -62,7 +58,6 @@ function Control() {
 			Game.addTrigger('execute', self.execute);
 		}
 	}
-
 
 	return self;
 }

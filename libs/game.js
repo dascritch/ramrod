@@ -3,7 +3,7 @@
 (function Game() {
 
 	var self = {
-		events 			: { /*'pushNextStateButton' :  [ self.world.nextState ]*/ },
+		events 			: { },
 		trigger 		: function(triggerName) {
 			if (self.events[triggerName] !== undefined) {
 				for(var index in self.events[triggerName]) {
