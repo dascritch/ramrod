@@ -37,7 +37,7 @@ function Control() {
 
 			document.getElementById('execute').addEventListener('click',preExecute);
 			$palette.on('click','li', self.addCommandInStack );
-			$('#instructions').on('click','.remove-command', self.removeCommandInStack , Game );
+			$('#instructions').on('click','.remove-command', self.removeCommandInStack );
 		},
 
 		listCommandInStack : function() {
