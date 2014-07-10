@@ -20,8 +20,17 @@ function Control() {
 			element.innerHTML = /*view.responseText*/ '\
 				<ul id="palette"></ul>\
 				<ol id="instructions"></ol>\
-				<button id="backspace" title="'+ Game.i18n.removeLastCommand +'"><b>⌫</b><span>'+ Game.i18n.removeLastCommand +'</span></button>\
-				<button id="execute" title="'+ Game.i18n.executeCommands +'"><b>⎆</b><span>'+ Game.i18n.executeCommands +'</span></button>\
+				<button id="backspace" title="'+ Game.i18n.removeLastCommand +'">\
+					<b>⌫</b>\
+					<span>'+ Game.i18n.removeLastCommand +'</span>\
+				</button>\
+				<button id="execute" title="'+ Game.i18n.executeCommands +'">\
+					<b>⎆</b>\
+					<span>'+ Game.i18n.executeCommands +'</span>\
+				</button>\
+				<span>\
+					0 moves\
+				</span>\
 			';
 			var $palette = $('#palette');
 			var $instructions = $('#instructions');
