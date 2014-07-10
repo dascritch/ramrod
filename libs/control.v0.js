@@ -78,7 +78,7 @@ function Control() {
 		 	$('#instructions li.notyet').eq(0).replaceWith($li);
 		 	self.updateCursor();
 		 	if ($('#instructions li.yet').size() == self.ramLength) {
-		 		$('#palette').hide();
+		 		$('#palette').addClass('nomore');
 		 	}
 		},
 		removeCommandInStack : function() {
@@ -86,7 +86,7 @@ function Control() {
 			self.updateCursor();
 
 			if ($('#instructions li.yet').size() < self.ramLength) {
-		 		$('#palette').show();
+		 		$('#palette').removeClass('nomore');
 		 	}
 		},
 

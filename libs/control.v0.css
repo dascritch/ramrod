@@ -48,9 +48,10 @@
 	pointer-events : none ;
 }
 
-#control #palette {
+#control #palette , #control.editable #palette.nomore {
 	max-height : 0px;
 	pointer-events : none ;
+	overflow : hidden;
 }
 
 #control.editable button , #control.editable #palette {
