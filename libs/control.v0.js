@@ -36,8 +36,7 @@ function Control() {
 			}
 
 			function preExecute() {
-				$('#backspace').hide();
-				$('#palette').hide();
+				self.cannotEdit();
 				Game.playerRobotRam = self.listCommandInStack();
 				Game.trigger('execute');
 			}
@@ -47,6 +46,12 @@ function Control() {
 			$('#backspace').on('click', self.removeCommandInStack );
 		},
 
+		canEdit : function() {
+			$(element).addClass('editable')
+		},
+		cannotEdit : function() {
+			$(element).removeClass('editable')
+		},
 		listCommandInStack : function() {
 			var stack = [];
 			$('#instructions li').each(function() {
@@ -78,6 +83,7 @@ function Control() {
 
 		init : function(Game) {
 			Game.addTrigger('start', self.build);
+			Game.addTrigger('start', self.canEdit);
 			Game.addTrigger('execute', self.execute);
 		}
 	}

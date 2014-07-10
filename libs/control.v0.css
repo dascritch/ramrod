@@ -33,6 +33,15 @@
 	margin : 0 auto;
 	font-size : 55px;
 }
+
+#control button , #control #palette  {
+	opacity : 0.1;
+}
+
+#control.editable button , #control.editable #palette {
+	opacity : 1;
+}
+
 #execute {
 	background : red;
 	color : white ;
