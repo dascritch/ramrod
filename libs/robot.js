@@ -31,7 +31,7 @@ function Robot() {
 			'moveFoward' : function() {
 				self.gear = MOVING_FOWARD;
 			},
-			'moveReward' : function() {
+			'moveBackward' : function() {
 				self.gear = MOVING_REWARD;
 			},
 		},

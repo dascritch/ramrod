@@ -8,7 +8,7 @@ function Control() {
 			'turnLeft'		: '↶',
 			'moveFoward'	: '↑',
 			'turnRight'		: '↷',
-			'moveReward'	: '↓',
+			'moveBackward'	: '↓',
 			'noOperation'	: '…',
 		},
 		ramLength : 0,

@@ -6,7 +6,7 @@ function i18n() {
 				"turnLeft"		: "turn left",
 				"moveFoward"	: "move foward",
 				"turnRight"		: "turn right",
-				"moveReward"	: "move reward",
+				"moveBackward"	: "move backward",
 				"noOperation"	: "no operation",
 			},
 			"removeLastCommand"	: "Remove",

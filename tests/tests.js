@@ -158,7 +158,7 @@ test( "programming robot move foward , turn right, move foward",function() {
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
-	robot.ram = ['moveFoward' , 'turnLeft' , 'moveReward'];
+	robot.ram = ['moveFoward' , 'turnLeft' , 'moveBackward'];
 	for (var i = robot.ram.length ; i > 0  ; i--) {
 		/*robot.execute();
 		world._nextWhichRobotState(0);*/
@@ -224,7 +224,7 @@ test( "bumping in the wall", function() {
 	equal( position.x , 2 , " not moving laterally");
 	equal( position.y , 3 , " stopped by the wall");
 
-	robot.ram = ['moveReward'];
+	robot.ram = ['moveBackward'];
 	world.nextState();
 	position = world.getPosition(robot);
 	equal( position.x , 2 , " laterally");
