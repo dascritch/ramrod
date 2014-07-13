@@ -24,6 +24,7 @@ Thanks
 ------
 * People at Code And Coffee Toulouse
 * Board games of our childhood (especially RoboRally)
+* The [Logo language](http://regards.sur.sciences.free.fr/ordis/logo/logo.htm)
 * [Nolife](http://nolife-tv.com)
 
 Licence
