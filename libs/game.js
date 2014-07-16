@@ -29,7 +29,10 @@
 
 	var internal = {};
 	internal.control = new Control();
+	internal.playfield = new Playfield();
+
 	internal.player = new Robot();
+	
 	internal.world = new World();
 	internal.i18n = new i18n();
 	for (var item in internal) {
