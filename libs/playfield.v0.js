@@ -11,6 +11,9 @@ function Playfield() {
 				}
 				bulk += '</p>';
 			}
+			// adding bot
+			bulk += '<b>⇑</b>';
+
 			element.innerHTML = bulk;
 		},
 
