@@ -15,6 +15,8 @@ function Control() {
 		tileEmptyInStack : '<li class="notyet"><b>?</b></li>',
 
 		build : function (Game) {
+			self.Game = Game;
+
 			var cl = self.paletteClassnamePrefix;
 
 			element.innerHTML = /*view.responseText*/ '\
@@ -23,6 +25,10 @@ function Control() {
 				<button id="backspace" title="'+ Game.i18n.removeLastCommand +'">\
 					<b>⌫</b>\
 					<span>'+ Game.i18n.removeLastCommand +'</span>\
+				</button>\
+				<button id="upload" title="'+ Game.i18n.uploadCommands +'">\
+					<b>⇒</b>\
+					<span>'+ Game.i18n.uploadCommands +'</span>\
 				</button>\
 				<button id="execute" title="'+ Game.i18n.executeCommands +'">\
 					<b>⎆</b>\
@@ -47,13 +53,6 @@ function Control() {
 				$instructions.append(self.tileEmptyInStack);
 			}
 
-			function preExecute() {
-				self.cannotEdit();
-				Game.playerRobotRam = self.listCommandInStack();
-				Game.trigger('execute');
-			}
-
-			document.getElementById('execute').addEventListener('click',preExecute);
 			$palette.on('click','li', self.addCommandInStack );
 			$('#backspace').on('click', self.removeCommandInStack );
 		},
@@ -73,9 +72,36 @@ function Control() {
 		listCommandInStack : function() {
 			var stack = [];
 			$('#instructions li').each(function() {
-				stack.push(this.className.substr(self.paletteClassnamePrefix.length));
+				stack.push(this.className.match(self.paletteClassnamePrefix + "(\\S*).*")[1]);
 			});
 			return stack;
+		},
+		preUpload : function() {
+			self.cannotEdit();
+			self.setUploadEnabled(false);
+			self.setExecutionEnabled();
+			self.Game.playerRobotRam = self.listCommandInStack();
+			self.Game.trigger('upload');
+		},
+		setUploadEnabled : function(enabled) {
+			var uploadButton = $('#upload');
+
+			if(enabled) {
+				uploadButton.on('click',self.preUpload);
+				uploadButton.addClass('enabled');
+			} else {
+				uploadButton.off('click',self.preUpload);
+				uploadButton.removeClass('enabled');
+			}
+		},
+		setExecutionEnabled: function() {
+			var executeButton = $('#execute');
+			executeButton.on('click', self.execute);
+			executeButton.addClass('enabled');
+		},
+		execute : function() {
+			console.log("gui asking for execution");
+			self.Game.trigger("robot.execute");
 		},
 		addCommandInStack : function() {
 			if ($('#instructions li.yet').size() >= self.ramLength) {
@@ -87,7 +113,8 @@ function Control() {
 		 	$('#instructions li.notyet').eq(0).replaceWith($li);
 		 	self.updateCursor();
 		 	if ($('#instructions li.yet').size() == self.ramLength) {
-		 		$('#palette').addClass('nomore');
+				$('#palette').addClass('nomore');
+		 		self.setUploadEnabled(true);
 		 	}
 		},
 		removeCommandInStack : function() {
@@ -96,18 +123,8 @@ function Control() {
 
 			if ($('#instructions li.yet').size() < self.ramLength) {
 		 		$('#palette').removeClass('nomore');
+		 		self.setUploadEnabled(false);
 		 	}
-		},
-
-		execute : function(Game) {
-			//alert('e000');
-		},
-		executeMove : function(Game) {
-			$('.activeCommand').removeClass('activeCommand');
-		 	$('#instructions li').eq(Game.actualMoveInSequence).addClass('activeCommand');
-		},
-		executeMyMove : function(Game) {
-			// Game.totalMovesInLevel;
 		},
 		levelWin : function(Game) {
 			$('#control').empty().html(Game.i18n.youWin+'<p><button id="nextlevel">'+Game.i18n.goNextLevel+'</button></p>')
@@ -115,7 +132,7 @@ function Control() {
 		init : function(Game) {
 			Game.addTrigger('start', self.build);
 			Game.addTrigger('start', self.canEdit);
-			Game.addTrigger('execute', self.execute);
+			Game.addTrigger('robot.uploaded', self.setExecutionEnabled);
 			Game.addTrigger('levelWin', self.levelWin);
 		}
 	}

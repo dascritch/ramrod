@@ -12,6 +12,7 @@ var MOVING_REWARD = -1;
 function Robot() {
 
 	var self = {
+		ram : [],
 		isFinished : false,
 
 		gear : MOVING_NO,
@@ -20,7 +21,6 @@ function Robot() {
 			this.gear = MOVING_NO;
 			this.rotating = ROTATING_NO;
 		},
-		ram : [],
 		procedures : {
 			'turnLeft' : function() {
 				self.rotating = ROTATING_COUNTERCLOCKWISE;
@@ -35,10 +35,24 @@ function Robot() {
 				self.gear = MOVING_REWARD;
 			},
 		},
-		execute : function() {
-			this.procedures[this.ram.shift()]();
+		execute : function(Game) {
+			var currentOpcode = self.ram.shift();
+			var currentInstruction = self.procedures[currentOpcode];
+
+			console.log("Executing instruction: ", currentOpcode);
+
+			currentInstruction();
+
 		},
-		init : function(Game) {}
+		upload : function(Game) {
+			console.log("I'm being uploaded !", Game.playerRobotRam);
+			self.ram = Game.playerRobotRam.slice(0);
+			Game.trigger('robot.uploaded');
+		},
+		init : function(Game) {
+			Game.addTrigger("upload", self.upload);
+			Game.addTrigger("robot.execute", self.execute);
+		}
 	};
 	
 	return self;
