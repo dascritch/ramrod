@@ -10,7 +10,6 @@ function i18n() {
 				"noOperation"	: "no operation",
 			},
 			"removeLastCommand"	: "Remove",
-			"uploadCommands"	: "Upload",
 			"executeCommands"	: "Execute !",
 			"youWin"			: "You win !!!",
 			"goNextLevel"		: "Go to next level !"

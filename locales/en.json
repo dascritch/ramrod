@@ -7,7 +7,6 @@
 		"noOperation"	: "no operation",
 	},
 	"removeLastCommand"	: "Remove",
-	"uploadCommands"	: "⇒",
 	"executeCommands"	: "Execute !",
 	"youWin"			: "You win !!!",
 	"goNextLevel"		: "Go to next level !"

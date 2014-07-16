@@ -44,7 +44,7 @@
 }
 
 #control button  {
-	color : grey;
+	opacity : 0;
 	pointer-events : none ;
 }
 
@@ -55,6 +55,7 @@
 }
 
 #control.editable button , #control.editable #palette {
+	opacity : 1;
 	pointer-events : auto;
 }
 
@@ -66,13 +67,12 @@
 	outline : 4px solid yellow;
 }
 
-#execute.enabled, #upload.enabled {
-	pointer-events : auto;
+#execute {
 	background : red;
 	color : white ;
 }
 
-#control.editable #backspace {
+#backspace {
 	background : yellow;
 	color : red;
 }
