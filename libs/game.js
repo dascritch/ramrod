@@ -24,6 +24,12 @@
 		actualMoveInSequence : 0,
 		totalMovesInLevel : 0,
 
+		playerRobotX: 0,
+		playerRobotY: 0 
+
+		levelWidth: 0,
+		levelHeight: 0,
+		
 		i18n : {}
 	};
 
