@@ -5,7 +5,7 @@ var FACING_EAST = 1;
 var FACING_SOUTH = 2;
 var FACING_WEST = 3;
 
-function World() {
+function createWorld() {
 
 	var directions = [
 		{title : 'North',	dx : 0 , dy : -1},

@@ -8,7 +8,7 @@ test( "Robot", function() {
 test( "World initialisation",function() {
 
 	//Given
-	var world = new World();
+	var world = createWorld();
 
 	//When
 	//Nothing is done
@@ -22,7 +22,7 @@ test( "World initialisation",function() {
 test( "Adding robots in a world",function() {
 
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 1,1);
@@ -37,7 +37,7 @@ test( "Adding robots in a world",function() {
 
 test( "Gearing north",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 1,1 , 0);
@@ -51,7 +51,7 @@ test( "Gearing north",function() {
 
 test( "Rotating to east",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 1,1 , FACING_NORTH);
@@ -66,7 +66,7 @@ test( "Rotating to east",function() {
 
 test( "Rotating to west",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 10, 20 , FACING_NORTH);
@@ -81,7 +81,7 @@ test( "Rotating to west",function() {
 
 test( "u turn to facing south",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
@@ -96,7 +96,7 @@ test( "u turn to facing south",function() {
 
 test( "from east to north",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_WEST);
@@ -109,7 +109,7 @@ test( "from east to north",function() {
 
 test( "rear gear seeing north",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
@@ -122,7 +122,7 @@ test( "rear gear seeing north",function() {
 
 test( "robot's registers are reseted at next state",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
@@ -136,7 +136,7 @@ test( "robot's registers are reseted at next state",function() {
 
 test( "programming robot move foward",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
@@ -154,7 +154,7 @@ test( "programming robot move foward",function() {
 
 test( "programming robot move foward , turn right, move foward",function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addRobot(robot, 2, 2 , FACING_NORTH);
@@ -175,7 +175,7 @@ test( "programming robot move foward , turn right, move foward",function() {
 test( "Adding walls to a world", function() {
 
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var WALL_1_X = 10;
 	var WALL_1_Y = 20;
 	var WALL_2_X = 30;
@@ -196,7 +196,7 @@ test( "Adding walls to a world", function() {
 
 test( "walls outside path aren't interfering", function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	//When
 	world.addWall(10, 2);
@@ -211,7 +211,7 @@ test( "walls outside path aren't interfering", function() {
 
 test( "bumping in the wall", function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	var position;
 	//When
@@ -232,13 +232,13 @@ test( "bumping in the wall", function() {
 });
 
 test ('coordinates x and y to a string for key' , function() {
-	var world = new World();
+	var world = createWorld();
 	equal(world._coordinatesToKey(5,-9) , '5,-9' , "ok for syntax");
 });
 
 test( "invalid Declare Slab", function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	//When
 	ok( !world.declareSlab('inexisting',2, 2) , "castorama doesnt have it" );
 	ok( !world.isSlab('inexisting',2,2) , " type of slab inexisting not instalable ");
@@ -246,7 +246,7 @@ test( "invalid Declare Slab", function() {
 
 test( "isFinished", function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	var position;
 	//When
@@ -267,7 +267,7 @@ test( "isFinished", function() {
 
 test( "no more moves when play finished", function() {
 	//Given
-	var world = new World();
+	var world = createWorld();
 	var robot = new Robot();
 	var position;
 	//When

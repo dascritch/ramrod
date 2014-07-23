@@ -33,7 +33,7 @@
 
 	internal.player = new Robot();
 	
-	internal.world = new World();
+	internal.world = createWorld();
 	internal.i18n = new i18n();
 	for (var item in internal) {
 		internal[item].init(self);
