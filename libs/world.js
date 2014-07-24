@@ -7,6 +7,9 @@ var FACING_WEST = 3;
 
 function createWorld() {
 
+	var playerRobotX = 12;
+	var playerRobotY = 8;
+
 	// Position all attributes in Game that are owned by World
 	function setupGame(Game) {
 		Game.playerRobotRam = [];
@@ -135,6 +138,7 @@ function createWorld() {
 			_nextWhichRobotState(i);
 		}
 	}
+
 	function init(Game) {
 		setupGame(Game);
 	}
@@ -149,7 +153,8 @@ function createWorld() {
 		isWalled: isWalled,
 		declareSlab: declareSlab,
 		isSlab: isSlab,
-		isFinished: function() { return isFinished },
+		get isFinished() { return isFinished },
+		init: init,
 
 
 		_coordinatesToKey: _coordinatesToKey,

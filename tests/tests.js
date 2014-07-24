@@ -1,3 +1,6 @@
+"use strict";
+
+QUnit.module("This test is not in a module :( ...");
 
 test( "Robot", function() {
 	ok( typeof Robot === "function", "Robot Model Exists" );
@@ -253,16 +256,16 @@ test( "isFinished", function() {
 	world.declareSlab('finish',2, 2);
 	world.addRobot(robot, 2, 4 , FACING_NORTH);
 	ok( !robot.isFinished , " Robot not winner yet ");
-	ok( !world.isFinished() , " Not a single winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
 	robot.ram = ['moveFoward','moveFoward'];
 
 	world.nextState();
 	ok( !robot.isFinished , " Robot not winner yet ");
-	ok( !world.isFinished() , " Not a single winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
 
 	world.nextState();
 	ok( robot.isFinished , " This robot has finished ");
-	ok( world.isFinished() , " Not a single winner yet ");
+	ok( world.isFinished , " Not a single winner yet ");
 });
 
 test( "no more moves when play finished", function() {
@@ -274,12 +277,12 @@ test( "no more moves when play finished", function() {
 	world.declareSlab('finish',2, 2);
 	world.addRobot(robot, 2, 4 , FACING_NORTH);
 	ok( !robot.isFinished , " Robot not winner yet ");
-	ok( !world.isFinished() , " Not a single winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
 	robot.ram = ['moveFoward','moveFoward','moveFoward'];
 
 	world.nextState();
 	ok( !robot.isFinished , " Robot not winner yet ");
-	ok( !world.isFinished() , " Not a single winner yet ");
+	ok( !world.isFinished , " Not a single winner yet ");
 
 	world.nextState();
 	world.nextState();
