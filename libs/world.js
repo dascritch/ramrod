@@ -7,20 +7,16 @@ var FACING_WEST = 3;
 
 function createWorld() {
 
-	var playerRobotX = 12;
-	var playerRobotY = 8;
+	var playerRobotX;
+	var playerRobotY;
 
 	// Position all attributes in Game that are owned by World
 	function setupGame(Game) {
 		Game.playerRobotRam = [];
 		Game.playerRobotRamLength = 6;
 
-		Game.playerRobotX = playerRobotX;
-		Game.playerRobotY = playerRobotY;
-
 		Game.levelWidth = 0;
 		Game.levelHeight = 0;
-
 	}
 
 	var directions = [

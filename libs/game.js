@@ -25,7 +25,8 @@
 		totalMovesInLevel : 0,
 
 		playerRobotX: 0,
-		playerRobotY: 0 
+		playerRobotY: 0,
+		playerRobotOrientation: 0, 
 
 		levelWidth: 0,
 		levelHeight: 0,
