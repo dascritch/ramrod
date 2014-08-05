@@ -57,7 +57,7 @@ test( "Rotating to east",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 1,1 , FACING_NORTH);
+	world.addRobot(robot, 1,1 , Directions.NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -72,7 +72,7 @@ test( "Rotating to west",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 10, 20 , FACING_NORTH);
+	world.addRobot(robot, 10, 20 , Directions.NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_COUNTERCLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -87,7 +87,7 @@ test( "u turn to facing south",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , Directions.NORTH);
 	robot.gear = MOVING_FOWARD;
 	robot.rotating = ROTATING_UTURN;
 	world._nextWhichRobotState(0);
@@ -102,12 +102,12 @@ test( "from east to north",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_WEST);
+	world.addRobot(robot, 2, 2 , Directions.WEST);
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
 	var position = world.getPosition(robot);
 	//Then
-	ok( position.o === FACING_NORTH , " seeing the North");
+	ok( position.o === Directions.NORTH , " seeing the North");
 });
 
 test( "rear gear seeing north",function() {
@@ -115,7 +115,7 @@ test( "rear gear seeing north",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , Directions.NORTH);
 	robot.gear = MOVING_REWARD;
 	world._nextWhichRobotState(0);
 	var position = world.getPosition(robot);
@@ -128,7 +128,7 @@ test( "robot's registers are reseted at next state",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , Directions.NORTH);
 	robot.gear = MOVING_REWARD;
 	robot.rotating = ROTATING_CLOCKWISE;
 	world._nextWhichRobotState(0);
@@ -142,7 +142,7 @@ test( "programming robot move foward",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , Directions.NORTH);
 	robot.ram = ['moveFoward'];
 	robot.execute();
 	world._nextWhichRobotState(0);
@@ -160,7 +160,7 @@ test( "programming robot move foward , turn right, move foward",function() {
 	var world = createWorld();
 	var robot = new Robot();
 	//When
-	world.addRobot(robot, 2, 2 , FACING_NORTH);
+	world.addRobot(robot, 2, 2 , Directions.NORTH);
 	robot.ram = ['moveFoward' , 'turnLeft' , 'moveBackward'];
 	for (var i = robot.ram.length ; i > 0  ; i--) {
 		/*robot.execute();
@@ -203,7 +203,7 @@ test( "walls outside path aren't interfering", function() {
 	var robot = new Robot();
 	//When
 	world.addWall(10, 2);
-	world.addRobot(robot, 2, 3 , FACING_NORTH);
+	world.addRobot(robot, 2, 3 , Directions.NORTH);
 	robot.ram = ['moveFoward'];
 	world.nextState();
 	//Then
@@ -219,7 +219,7 @@ test( "bumping in the wall", function() {
 	var position;
 	//When
 	world.addWall(2, 2);
-	world.addRobot(robot, 2, 3 , FACING_NORTH);
+	world.addRobot(robot, 2, 3 , Directions.NORTH);
 	robot.ram = ['moveFoward'];
 	world.nextState();
 	//Then
@@ -254,7 +254,7 @@ test( "isFinished", function() {
 	var position;
 	//When
 	world.declareSlab('finish',2, 2);
-	world.addRobot(robot, 2, 4 , FACING_NORTH);
+	world.addRobot(robot, 2, 4 , Directions.NORTH);
 	ok( !robot.isFinished , " Robot not winner yet ");
 	ok( !world.isFinished , " Not a single winner yet ");
 	robot.ram = ['moveFoward','moveFoward'];
@@ -275,7 +275,7 @@ test( "no more moves when play finished", function() {
 	var position;
 	//When
 	world.declareSlab('finish',2, 2);
-	world.addRobot(robot, 2, 4 , FACING_NORTH);
+	world.addRobot(robot, 2, 4 , Directions.NORTH);
 	ok( !robot.isFinished , " Robot not winner yet ");
 	ok( !world.isFinished , " Not a single winner yet ");
 	robot.ram = ['moveFoward','moveFoward','moveFoward'];

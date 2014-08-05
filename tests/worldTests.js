@@ -22,7 +22,9 @@ QUnit.test("Initialize game's attributes when it is initialized", function() {
 	//then
 	notDeepEqual(mockGame.playerRobotY, undefined, "player robot Y has been initialized");
 	notDeepEqual(mockGame.playerRobotX, undefined, "player robot X has been initialized");
+	notDeepEqual(mockGame.playerRobotOrientation, undefined, "player robot orientation");
 	notDeepEqual(mockGame.levelWidth, undefined, "level width has been initialized");
 	notDeepEqual(mockGame.levelHeight, undefined, "level height Y has been initialized");
 
 });
+

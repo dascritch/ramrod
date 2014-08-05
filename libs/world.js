@@ -1,9 +1,17 @@
 'use strict';
 
-var FACING_NORTH = 0;
-var FACING_EAST = 1;
-var FACING_SOUTH = 2;
-var FACING_WEST = 3;
+var Directions = [
+	{title : 'North',	dx : 0 , dy : -1},
+	{title : 'East',	dx : 1 , dy : 0},
+	{title : 'South',	dx : 0 , dy : 1},
+	{title : 'West',	dx : -1, dy : 0}
+];
+
+Directions.count = 0;
+Directions.NORTH = Directions.count++;
+Directions.EAST = Directions.count++;
+Directions.SOUTH = Directions.count++;
+Directions.WEST = Directions.count++;
 
 function createWorld() {
 
@@ -17,16 +25,11 @@ function createWorld() {
 
 		Game.levelWidth = 0;
 		Game.levelHeight = 0;
+
+		Game.playerRobotX = 2;
+		Game.playerRobotY = 3;
+		Game.playerRobotOrientation = Directions[Directions.EAST];
 	}
-
-	var directions = [
-		{title : 'North',	dx : 0 , dy : -1},
-		{title : 'East',	dx : 1 , dy : 0},
-		{title : 'South',	dx : 0 , dy : 1},
-		{title : 'West',	dx : -1, dy : 0}
-	];
-	var count_directions = directions.length ;
-
 
 	var slabs = [];
 
@@ -34,12 +37,6 @@ function createWorld() {
 		return x.toString()+','+y.toString();
 	}
 
-	var defaultSlab = {
-		willDie		: false,
-		canAccess	: true,
-		dx			: 0,
-		dy			: 0
-	}
 
 	var typeOfSlabs = {
 		'start'					: {},
@@ -104,9 +101,9 @@ function createWorld() {
 		var o = positions[which].o;
 		o += robot.rotating;
 		o = ( o < 0 )
-			? ( o + count_directions )
-			: ( o % count_directions );
-		var orientation = directions[o];
+			? ( o + Directions.count )
+			: ( o % Directions.count );
+		var orientation = Directions[o];
 		positions[which].o = o;
 		var future_x = positions[which].x + orientation.dx * robot.gear;
 		var future_y = positions[which].y + orientation.dy * robot.gear;
