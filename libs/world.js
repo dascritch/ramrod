@@ -40,10 +40,10 @@ function createWorld() {
 
 	var typeOfSlabs = {
 		'start'					: {},
-		'finish'				: {willFinish : true },
-		'wall'					: {canAccess : false},
-		'deadly'				: {willDie : true},
-		'conveyorBeltToNorth'	: { dy : -1 },
+		'finish'				: {},
+		'wall'					: {},
+		'deadly'				: {},
+		'conveyorBelt'			: {},
 	}
 
 	function declareSlab(type, x, y) {
