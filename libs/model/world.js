@@ -20,18 +20,34 @@ function createWorld() {
 			var thing = content.getThing();
 			if(thing.isRunning && thing.isRunning()) {
 
-				remove(content);				
-				add(
-					content.getThing(),
-					content.getPosition().translate(content.getOrientation()),
-					content.getOrientation()
-				);
+				var finalPosition = content.getPosition().translate(content.getOrientation());
+
+				var thingsAtFinalPosition = getThingsByPosition(finalPosition);
+				var blockingThingAtFinalPosition = false;
+
+				var nbOfThingsAtFinalPosition = thingsAtFinalPosition.length;				
+				for(var j = 0; j < nbOfThingsAtFinalPosition; j++) {
+					var thingAtFinalPosition = thingsAtFinalPosition[j];
+					if(thingAtFinalPosition.isBlocking && thingAtFinalPosition.isBlocking()) {
+						blockingThingAtFinalPosition = true;
+						break;
+					}
+				}
+
+				if(!blockingThingAtFinalPosition) {
+					remove(content);				
+					add(
+						content.getThing(),
+						finalPosition,
+						content.getOrientation()
+					)
+				}
 			}
 
 		});
 	}
 
-	function getContentByPosition(position) {
+	function getThingsByPosition(position) {
 		
 		var result = [];
 
@@ -54,15 +70,15 @@ function createWorld() {
 
 	return {
 		add :					add,
-		getContentByPosition:	getContentByPosition,
+		getThingsByPosition:	getThingsByPosition,
 		tick:					tick
 	}
 }
 
 /**
-  A content is the presence of something in the world,
+  A content is something in the world,
   at a given position and in a given direction
-**/
+*/
 function createContent(thing, position, orientation) {
 
 	function getPosition() { return position }
