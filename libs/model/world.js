@@ -1,43 +1,62 @@
 "use strict";
 
-function createWorld() {
+			// var position = createPosition(content.x, content.y);
+			// var item = createItem(content.type);
+			// add(item, position, content.orientation); 
+
+
+function createWorld(worldDto, createContentFromDto) {
 
 	var contents = [];
 
-	function add(thing, position, orientation) {
+	if(worldDto != undefined ) {
 
-		if(orientation === undefined) {
-			orientation = 0;
-		}
-		var content = createContent(thing, position, orientation);
+		worldDto.forEach(function(content) {
+			contents = createContentFromDto(content);
+		});
+
+	}
+
+	function add(item, position, orientation) {
+
+		var content = createContent(item, position, orientation);
 		contents.push(content);
 
 	}
 
 	function tick() {
+
+		contents.forEach(function(content) {
+			var item = content.getItem();
+
+			if(item.tick) {
+				item.tick();
+			}
+		})
+		
 		contents.forEach(function(content) {
 
-			var thing = content.getThing();
-			if(thing.isRunning && thing.isRunning()) {
+			var item = content.getItem();
+			if(item.isRunning && item.isRunning()) {
 
 				var finalPosition = content.getPosition().translate(content.getOrientation());
 
-				var thingsAtFinalPosition = getThingsByPosition(finalPosition);
-				var blockingThingAtFinalPosition = false;
+				var itemsAtFinalPosition = getItemsByPosition(finalPosition);
+				var blockingItemAtFinalPosition = false;
 
-				var nbOfThingsAtFinalPosition = thingsAtFinalPosition.length;				
-				for(var j = 0; j < nbOfThingsAtFinalPosition; j++) {
-					var thingAtFinalPosition = thingsAtFinalPosition[j];
-					if(thingAtFinalPosition.isBlocking && thingAtFinalPosition.isBlocking()) {
-						blockingThingAtFinalPosition = true;
+				var nbOfItemsAtFinalPosition = itemsAtFinalPosition.length;				
+				for(var j = 0; j < nbOfItemsAtFinalPosition; j++) {
+					var itemAtFinalPosition = itemsAtFinalPosition[j];
+					if(itemAtFinalPosition.isBlocking && itemAtFinalPosition.isBlocking()) {
+						blockingItemAtFinalPosition = true;
 						break;
 					}
 				}
 
-				if(!blockingThingAtFinalPosition) {
+				if(!blockingItemAtFinalPosition) {
 					remove(content);				
 					add(
-						content.getThing(),
+						content.getItem(),
 						finalPosition,
 						content.getOrientation()
 					)
@@ -47,7 +66,7 @@ function createWorld() {
 		});
 	}
 
-	function getThingsByPosition(position) {
+	function getItemsByPosition(position) {
 		
 		var result = [];
 
@@ -55,7 +74,7 @@ function createWorld() {
 		for(var i = 0; i < contentsLength; i++) {
 			var currentContent = contents[i];
 			if(currentContent.getPosition().equal(position)) {
-				result.push(currentContent.getThing());
+				result.push(currentContent.getItem());
 			}
 		}
 
@@ -70,24 +89,7 @@ function createWorld() {
 
 	return {
 		add :					add,
-		getThingsByPosition:	getThingsByPosition,
+		getItemsByPosition: 	getItemsByPosition,
 		tick:					tick
-	}
-}
-
-/**
-  A content is something in the world,
-  at a given position and in a given direction
-*/
-function createContent(thing, position, orientation) {
-
-	function getPosition() { return position }
-	function getOrientation() { return orientation }
-	function getThing() { return thing }
-
-	return {
-		getThing:		getThing,
-		getPosition:	getPosition,
-		getOrientation: getOrientation
 	}
 }
