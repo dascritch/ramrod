@@ -22,5 +22,15 @@ function createContent(item, position, orientation) {
 }
 
 function createContentFromDto(dto) {
-	return createContent("a", "b", "c");
+
+	var item = createItem(dto.type);
+
+	switch(dto.type) {
+		case "wall":
+			item.isBlocking = function() { return true };
+	}
+
+	var position = createPosition(dto.x, dto.y);
+
+	return createContent(item, position, dto.o);
 }

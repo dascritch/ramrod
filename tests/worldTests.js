@@ -119,11 +119,11 @@ QUnit.test("not move running items through blocking items", function() {
 
 });
 
-QUnit.test("initialize themselves from a dto", function() {
+QUnit.test("initialize themselves from a dto using the injected dto converter", function() {
 
 	//given
-	var wallDto = {"type":"wall","x":"10","y":"20"};
-	var treeDto = {"type":"tree","x":"10","y":"40","o":"1"};
+	var wallDto = "stub wall dto";
+	var treeDto = "stub tree dto";
 	var worldDto = [wallDto, treeDto];
 
 	var converter = { createItemFromDto: function() {} };
@@ -135,26 +135,11 @@ QUnit.test("initialize themselves from a dto", function() {
 		converter.createItemFromDto(param);
 	}
 
-    // var tenTwentyPosition = createPosition(10,20);
-    // var tenFourtyPosition = createPosition(10,40);
-
     //when
     var world = createWorld(worldDto, createItemFromDto);
 
-    // var itemsAtTenTwenty = world.getItemsByPosition(tenTwentyPosition);
-    // var itemsAtTenFourtyPosition = world.getItemsByPosition(tenFourtyPosition);
-
     //then
-
 	ok(mockConverter.verify());    
-    // equal(itemsAtTenTwenty.length, 1, "there is exactly one item at position (10;20)");
-    // equal(itemsAtTenTwenty[0].getType(), "wall", "there is a wall at (10;20)");
-    // ok(itemsAtTenTwenty[0].isBlocking(), "created wall is bloking");
-
-    // equal(itemsAtTenFourtyPosition.length, 2, "there are exactly two items at position (10;20)");
-    // equal(itemsAtTenFourtyPosition[0].getType(), "tree", "there is a tree at (10;40)");
-    // ok(!itemsAtTenFourtyPosition[0].isBlocking(), "created tree is not bloking");
-    // equal(itemsAtTenFourtyPosition[1].getType(), "trap", "there is a trap at (10;40)");
 
 });
 
